@@ -1,6 +1,6 @@
 # Vowlt Website & Blog
 
-This is the official repository for the marketing site and blog for LinkVault, located at [vowlt.app](https://vowlt.app).
+This is the official repository for the marketing site and blog for Vowlt, located at [vowlt.app](https://vowlt.app).
 
 ## License
 
