@@ -36,3 +36,13 @@
   :where(.dark, .dark *) .prose :where(pre) {
     border-color: #30363d;
   }
+
+  /* Shiki dual theme support with class-based dark mode */
+  :where(.dark, .dark *) .prose .astro-code,
+  :where(.dark, .dark *) .prose .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }

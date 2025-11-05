@@ -36,12 +36,14 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
   }),
 });
+```
+
+**Tech stack:**
 
 - Backend: .NET/C# with PostgreSQL + pgvector
 - Frontend: Angular + TypeScript
 - AI: OpenAI/Anthropic APIs
 - Deployment: Docker containers
-```
 
 What's next?
 
