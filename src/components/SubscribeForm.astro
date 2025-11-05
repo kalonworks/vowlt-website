@@ -1,9 +1,9 @@
 ---
-  // Clean Kit form - no bloat, uses your Tailwind styles
+  import { EXTERNAL_URLS } from "../constants";
 ---
 
   <form
-    action="https://app.kit.com/forms/8740520/subscriptions"
+    action={EXTERNAL_URLS.kit}
     method="post"
     class="kit-form"
     id="kit-form"
@@ -48,15 +48,15 @@
         });
 
         if (response.ok) {
-          message.textContent = '✅ Success! Check your email to confirm your subscription.';
+          message.innerHTML = '<span aria-label="Success" role="img">✅</span> Success! Check your email to confirm your subscription.';
           message.className = 'text-sm text-green-600 dark:text-green-400 mt-2 font-medium';
           form.reset();
         } else {
-          message.textContent = '❌ Something went wrong. Please try again.';
+          message.innerHTML = '<span aria-label="Error" role="img">❌</span> Something went wrong. Please try again.';
           message.className = 'text-sm text-red-600 dark:text-red-400 mt-2';
         }
       } catch (error) {
-        message.textContent = '❌ Network error. Please try again.';
+        message.innerHTML = '<span aria-label="Error" role="img">❌</span> Network error. Please try again.';
         message.className = 'text-sm text-red-600 dark:text-red-400 mt-2';
       }
     });

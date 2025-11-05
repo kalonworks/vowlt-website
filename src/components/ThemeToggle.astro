@@ -11,7 +11,7 @@
   <!-- Sun icon (show in dark mode) -->
   <svg
     id="theme-toggle-light-icon"
-    class="hidden w-5 h-5 dark:block text-gray-800 dark:text-gray-200"
+    class="hidden w-5 h-5 dark:block dark:text-gray-200"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
@@ -39,13 +39,11 @@
   // Toggle theme on button click (initialization happens in layout head)
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
     const isDark = document.documentElement.classList.contains('dark');
-    const newTheme = isDark ? 'light' : 'dark';
-
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    document.documentElement.classList.toggle('dark');
+    try {
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    } catch (e) {
+      // Silent fail - theme will still work for this session
     }
-    localStorage.setItem('theme', newTheme);
   });
 </script>

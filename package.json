@@ -1,5 +1,6 @@
 {
-  "name": "astro",
+  "name": "vowlt-website",
+  "description": "Official website for vowlt - your personal search engine built from bookmarks",
   "type": "module",
   "version": "0.0.1",
   "scripts": {

@@ -5,12 +5,16 @@
 
 <script is:inline>
   // Initialize theme before page renders to prevent flash
+  const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
   const getThemePreference = () => {
-    const stored = localStorage.getItem('theme');
-    if (stored === 'light' || stored === 'dark') {
-      return stored;
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        return stored;
+      }
+    } catch (e) {}
+    return darkModeQuery.matches ? 'dark' : 'light';
   };
 
   const setTheme = (theme) => {
@@ -19,15 +23,21 @@
     } else {
       document.documentElement.classList.remove('dark');
     }
-    localStorage.setItem('theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {
+      // Silent fail - theme will still work for this session
+    }
   };
 
   setTheme(getThemePreference());
 
   // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
+  darkModeQuery.addEventListener('change', (e) => {
+    try {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    } catch (e) {}
   });
 </script>

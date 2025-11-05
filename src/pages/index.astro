@@ -1,12 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ButtondownForm from "../components/SubscribeForm.astro";
+import { SITE_CONFIG } from "../config/site";
+import { ROUTES } from "../constants";
 ---
 
-<BaseLayout
-  title="vowlt - Your Personal Search Engine Built from Bookmarks"
-  description="Open source bookmarking with AI-powered categorization and semantic search. Self-host or use our hosted service."
->
+<BaseLayout title={SITE_CONFIG.title} description={SITE_CONFIG.description}>
   <main
     class="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
   >
@@ -17,7 +16,7 @@ import ButtondownForm from "../components/SubscribeForm.astro";
           <span
             class="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent"
           >
-            vowlt
+            {SITE_CONFIG.name}
           </span>
         </h1>
 
@@ -51,7 +50,7 @@ import ButtondownForm from "../components/SubscribeForm.astro";
       <!-- Blog CTA -->
       <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
         <a
-          href="/blog"
+          href={ROUTES.blog}
           class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-lg transition-colors group"
         >
           Read our blog
@@ -77,12 +76,12 @@ import ButtondownForm from "../components/SubscribeForm.astro";
   <footer class="text-center py-8 px-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
     <p class="text-gray-600 dark:text-gray-400">
       Built by <a
-        href="https://kalonworks.com"
+        href={SITE_CONFIG.author.url}
         class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium hover:underline transition-colors"
-        >kalonworks</a
+        >{SITE_CONFIG.author.name}</a
       >
       <span class="mx-2">•</span>
-      <span class="font-medium">Open source</span> (AGPL-3.0)
+      <span class="font-medium">Open source</span> ({SITE_CONFIG.license})
     </p>
   </footer>
 </BaseLayout>

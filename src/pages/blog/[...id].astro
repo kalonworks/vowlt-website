@@ -1,12 +1,11 @@
 ---
   import { getCollection, render } from 'astro:content';
   import BlogPost from '../../layouts/BlogPost.astro';
+  import { isPublished } from '../../utils/blog';
 
   // Generate static paths for all blog posts
   export async function getStaticPaths() {
-    const posts = await getCollection('blog', ({ data }) => {
-      return data.draft !== true;
-    });
+    const posts = await getCollection('blog', isPublished);
 
     return posts.map((post) => ({
       params: { id: post.id },
