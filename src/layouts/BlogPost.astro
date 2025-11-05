@@ -1,0 +1,136 @@
+---
+import "../styles/global.css";
+import SEO from "../components/SEO.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import ThemeScript from "../components/ThemeScript.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  tags = [],
+} = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title={`${title} | vowlt blog`}
+      description={description}
+      image={heroImage}
+      type="article"
+      publishedTime={pubDate.toISOString()}
+    />
+    <ThemeScript />
+  </head>
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+    <ThemeToggle />
+    <!-- Header -->
+    <header class="border-b border-gray-200 dark:border-gray-700 py-6 px-6">
+      <div class="max-w-3xl mx-auto flex justify-between items-center">
+        <a
+          href="/"
+          class="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+        >
+          vowlt
+        </a>
+        <nav>
+          <a href="/blog" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"> Blog </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Article -->
+    <main class="max-w-3xl mx-auto px-6 py-12">
+      <article>
+        <!-- Meta -->
+        <div class="mb-8">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            {title}
+          </h1>
+          <div class="text-gray-600 dark:text-gray-400 space-y-2">
+            <p>
+              <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+              {
+                updatedDate && (
+                  <span>
+                    {" "}
+                    • Updated:{" "}
+                    <time datetime={updatedDate.toISOString()}>
+                      {formattedUpdatedDate}
+                    </time>
+                  </span>
+                )
+              }
+            </p>
+            {
+              tags.length > 0 && (
+                <div class="flex gap-2 flex-wrap">
+                  {tags.map((tag) => (
+                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        {
+          heroImage && (
+            <img src={heroImage} alt={title} class="w-full rounded-lg mb-8" />
+          )
+        }
+
+        <!-- Content -->
+        <div
+          class="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-a:font-medium"
+        >
+          <slot />
+        </div>
+      </article>
+
+      <!-- Back to blog -->
+      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium">
+          ← Back to blog
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 px-6 border-t border-gray-200 dark:border-gray-700 mt-12">
+      <p class="text-gray-600 dark:text-gray-400">
+        Built by <a
+          href="https://kalonworks.com"
+          class="text-blue-600 dark:text-blue-400 hover:underline">kalonworks</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

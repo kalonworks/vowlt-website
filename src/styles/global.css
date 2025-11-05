@@ -1,0 +1,54 @@
+ @import "tailwindcss";
+  @plugin "@tailwindcss/typography";
+
+  /* Enable class-based dark mode for Tailwind 4 */
+  @variant dark (&:where(.dark, .dark *));
+
+  /* GitHub-inspired dark mode colors */
+  @theme {
+    --color-gh-canvas-default: #ffffff;
+    --color-gh-canvas-subtle: #f6f8fa;
+    --color-gh-text-primary: #1f2328;
+    --color-gh-text-secondary: #656d76;
+    --color-gh-border-default: #d1d9e0;
+
+    /* Dark mode */
+    --color-gh-canvas-default-dark: #0d1117;
+    --color-gh-canvas-subtle-dark: #161b22;
+    --color-gh-text-primary-dark: #e6edf3;
+    --color-gh-text-secondary-dark: #7d8590;
+    --color-gh-border-default-dark: #30363d;
+  }
+
+  /* GitHub-style prose refinements */
+  .prose {
+    /* Inline code */
+    --tw-prose-code: #1f2328;
+    --tw-prose-code-bg: #f6f8fa;
+
+    /* Dark mode inline code */
+    --tw-prose-invert-code: #e6edf3;
+    --tw-prose-invert-code-bg: #161b22;
+  }
+
+  .prose :where(code):not(:where(pre *)) {
+    background-color: var(--tw-prose-code-bg);
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-size: 0.875em;
+    font-weight: 400;
+  }
+
+  .prose.dark :where(code):not(:where(pre *)) {
+    background-color: var(--tw-prose-invert-code-bg);
+  }
+
+  /* Code blocks - let Shiki handle colors, just style container */
+  .prose :where(pre) {
+    border-radius: 6px;
+    border: 1px solid #d1d9e0;
+  }
+
+  .prose.dark :where(pre) {
+    border-color: #30363d;
+  }
