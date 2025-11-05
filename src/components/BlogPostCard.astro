@@ -39,7 +39,7 @@ const { post } = Astro.props;
   </p>
 
   <div
-    class="relative z-10 flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+    class="relative z-10 flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400"
   >
     <time datetime={post.data.pubDate.toISOString()}>
       {formatDate(post.data.pubDate)}
@@ -47,13 +47,18 @@ const { post } = Astro.props;
 
     {
       post.data.tags && post.data.tags.length > 0 && (
-        <div class="flex gap-2">
-          {post.data.tags.map((tag) => (
-            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
-              {tag}
-            </span>
-          ))}
-        </div>
+        <>
+          <span class="text-gray-400 dark:text-gray-500" aria-hidden="true">
+            •
+          </span>
+          <div class="flex gap-2 flex-wrap">
+            {post.data.tags.map((tag) => (
+              <span class="px-2 py-1 bg-gray-50 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 rounded text-xs">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </>
       )
     }
   </div>
